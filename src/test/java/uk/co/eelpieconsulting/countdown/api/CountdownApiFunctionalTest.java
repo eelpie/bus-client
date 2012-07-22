@@ -46,6 +46,15 @@ public class CountdownApiFunctionalTest {
 	}
 	
 	@Test
+	public void routeStopsTest() throws Exception {
+		final List<Stop> routeStops = api.getRouteStops("R68", 2);
+		for (Stop stop : routeStops) {
+			System.out.println(stop.getName());
+		}
+		assertEquals(45, routeStops.size());
+	}
+	
+	@Test
 	public void canLocateStopById() throws Exception {
 		final Stop stop = api.findStopById(53550);
 		
