@@ -1,6 +1,7 @@
 package uk.co.eelpieconsulting.countdown.parsers;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.util.List;
 
@@ -28,6 +29,8 @@ public class StopSearchParserTest {
 		assertEquals("POPES GROTTO", stop.getName());
 		assertEquals(51.44231079780184, stop.getLatitude(), 0);
 		assertEquals(-0.3313948004782073, stop.getLongitude(), 0);
+		
+		assertFalse(stop.getRoutes().isEmpty());
 	}
 	
 }

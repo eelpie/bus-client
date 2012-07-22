@@ -44,4 +44,8 @@ public class CountdownApi {
 		return stopSearchParser.parseStop(httpFetcher.fetchContent(countdownApiUrlBuilder.getStopIdSearchUrl(id), "UTF-8"));
 	}
 	
+	public List<Stop> getRouteStops(String route, int run) throws HttpFetchException, ParsingException {
+		return stopSearchParser.parse(httpFetcher.fetchContent(countdownApiUrlBuilder.getRoutesStopUrl(route, run), "UTF-8"));
+	}
+	
 }

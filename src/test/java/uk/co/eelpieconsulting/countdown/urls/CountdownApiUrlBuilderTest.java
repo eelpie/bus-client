@@ -29,5 +29,10 @@ public class CountdownApiUrlBuilderTest {
 	public void canConstructUrlForStopIdSearch() throws Exception {
 		assertEquals("http://buses.eelpieconsulting.co.uk/stop/53550", urlBuilder.getStopIdSearchUrl(53550));
 	}
+	
+	@Test
+	public void canConstructUrlForRouteStops() throws Exception {
+		assertEquals("http://buses.eelpieconsulting.co.uk/route/N22/1/stops", urlBuilder.getRoutesStopUrl("N22", 1));
+	}
 
 }

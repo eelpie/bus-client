@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import uk.co.eelpieconsulting.busroutes.model.Route;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
 import uk.co.eelpieconsulting.countdown.exceptions.ParsingException;
 
@@ -43,12 +44,22 @@ public class StopSearchParser {
 	}
 	
 	private Stop parseSingleStop(final JSONObject stopJson) throws JSONException {		
-		return new Stop(stopJson.getInt(STOP_ID),
+		Stop stop = new Stop(stopJson.getInt(STOP_ID),
 					stopJson.getString(STOP_NAME), 
 					stopJson.has(TOWARDS) ? stopJson.getString(TOWARDS) : null,
 					stopJson.isNull(STOP_INDICATOR) ? null : stopJson.getString(STOP_INDICATOR), 
 					stopJson.getDouble(LATITUDE), stopJson.getDouble(LONGITUDE), 
 					null, null);
+		
+		if (stopJson.has("routes")) {
+			JSONArray jsonRoutes = stopJson.getJSONArray("routes");
+			for (int i = 1; i < jsonRoutes.length(); i++) {
+				final JSONObject jsonRoute = jsonRoutes.getJSONObject(i);
+				stop.addRoute(new Route(jsonRoute.getString("route"), jsonRoute.getInt("run"), jsonRoute.getString("towards")));
+			}	
+		}
+		
+		return stop;
 	}
 
 }

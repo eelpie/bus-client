@@ -20,4 +20,8 @@ public class CountdownApiUrlBuilder {
 		return apiUrl + "/stop/" + id;				
 	}
 
+	public String getRoutesStopUrl(String route, int run) {
+		return apiUrl + "/route/" + route + "/" + run + "/stops";
+	}
+
 }
