@@ -1,4 +1,4 @@
-package uk.co.eelpieconsulting.countdown.parsers;
+package uk.co.eelpieconsulting.buses.client.parsers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.co.eelpieconsulting.buses.client.parsers.StopSearchParser;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
 
 public class StopSearchParserTest {

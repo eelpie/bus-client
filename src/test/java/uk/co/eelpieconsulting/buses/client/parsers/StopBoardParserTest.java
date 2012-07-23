@@ -1,12 +1,13 @@
-package uk.co.eelpieconsulting.countdown.parsers;
+package uk.co.eelpieconsulting.buses.client.parsers;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.co.eelpieconsulting.countdown.model.Arrival;
-import uk.co.eelpieconsulting.countdown.model.StopBoard;
+import uk.co.eelpieconsulting.buses.client.model.Arrival;
+import uk.co.eelpieconsulting.buses.client.model.StopBoard;
+import uk.co.eelpieconsulting.buses.client.parsers.StopBoardParser;
 
 public class StopBoardParserTest {
 

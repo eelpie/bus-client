@@ -1,4 +1,4 @@
-package uk.co.eelpieconsulting.countdown.model;
+package uk.co.eelpieconsulting.buses.client.model;
 
 import java.util.List;
 

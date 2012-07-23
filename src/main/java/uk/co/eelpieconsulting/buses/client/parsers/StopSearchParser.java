@@ -1,4 +1,4 @@
-package uk.co.eelpieconsulting.countdown.parsers;
+package uk.co.eelpieconsulting.buses.client.parsers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.busroutes.model.Route;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
-import uk.co.eelpieconsulting.countdown.exceptions.ParsingException;
 
 public class StopSearchParser {
 

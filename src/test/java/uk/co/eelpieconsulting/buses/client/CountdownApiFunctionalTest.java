@@ -1,4 +1,4 @@
-package uk.co.eelpieconsulting.countdown.api;
+package uk.co.eelpieconsulting.buses.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -9,9 +9,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.co.eelpieconsulting.buses.client.CountdownApi;
+import uk.co.eelpieconsulting.buses.client.model.Arrival;
+import uk.co.eelpieconsulting.buses.client.model.StopBoard;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
-import uk.co.eelpieconsulting.countdown.model.Arrival;
-import uk.co.eelpieconsulting.countdown.model.StopBoard;
 
 public class CountdownApiFunctionalTest {
 	

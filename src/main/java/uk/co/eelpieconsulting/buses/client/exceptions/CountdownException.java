@@ -1,4 +1,4 @@
-package uk.co.eelpieconsulting.countdown.exceptions;
+package uk.co.eelpieconsulting.buses.client.exceptions;
 
 public abstract class CountdownException extends Exception {
 	

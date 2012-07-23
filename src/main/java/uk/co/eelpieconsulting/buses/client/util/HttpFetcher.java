@@ -1,4 +1,4 @@
-package uk.co.eelpieconsulting.countdown.util;
+package uk.co.eelpieconsulting.buses.client.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HttpContext;
 
-import uk.co.eelpieconsulting.countdown.exceptions.HttpFetchException;
+import uk.co.eelpieconsulting.buses.client.exceptions.HttpFetchException;
 
 public class HttpFetcher {
 	

@@ -1,4 +1,4 @@
-package uk.co.eelpieconsulting.countdown.parsers;
+package uk.co.eelpieconsulting.buses.client.parsers;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

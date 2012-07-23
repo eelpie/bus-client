@@ -1,4 +1,4 @@
-package uk.co.eelpieconsulting.countdown.urls;
+package uk.co.eelpieconsulting.buses.client.urls;
 
 public class CountdownApiUrlBuilder {
 	

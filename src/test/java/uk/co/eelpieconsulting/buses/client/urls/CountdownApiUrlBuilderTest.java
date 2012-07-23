@@ -1,9 +1,11 @@
-package uk.co.eelpieconsulting.countdown.urls;
+package uk.co.eelpieconsulting.buses.client.urls;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import uk.co.eelpieconsulting.buses.client.urls.CountdownApiUrlBuilder;
 
 public class CountdownApiUrlBuilderTest {
 
