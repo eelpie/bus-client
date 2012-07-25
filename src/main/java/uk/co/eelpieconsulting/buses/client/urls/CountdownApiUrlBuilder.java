@@ -8,8 +8,12 @@ public class CountdownApiUrlBuilder {
 		this.apiUrl = apiUrl;
 	}
 	
+	public String getStopUrl(int stopId) {
+		return apiUrl + "/stop/" + stopId;
+	}
+	
 	public String getStopBoardUrl(int stopId) {
-		return apiUrl + "/stop/" + stopId + "/arrivals";
+		return getStopUrl(stopId) + "/arrivals";
 	}
 	
 	public String getMarkerSearchUrl(double latitude, double longitude, int radius) {
@@ -22,6 +26,10 @@ public class CountdownApiUrlBuilder {
 
 	public String getRoutesStopUrl(String route, int run) {
 		return apiUrl + "/route/" + route + "/" + run + "/stops";
+	}
+
+	public String getStopMessagesUrl(int stopId) {
+		return getStopUrl(stopId) + "/messages";
 	}
 
 }

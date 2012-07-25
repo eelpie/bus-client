@@ -15,6 +15,7 @@ import uk.co.eelpieconsulting.buses.client.exceptions.HttpFetchException;
 import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.buses.client.model.StopBoard;
 import uk.co.eelpieconsulting.buses.client.parsers.StopBoardParser;
+import uk.co.eelpieconsulting.buses.client.parsers.StopMessageParser;
 import uk.co.eelpieconsulting.buses.client.parsers.StopSearchParser;
 import uk.co.eelpieconsulting.buses.client.urls.CountdownApiUrlBuilder;
 import uk.co.eelpieconsulting.buses.client.util.HttpFetcher;
@@ -35,6 +36,7 @@ public class CountdownApiTest {
 	@Mock HttpFetcher httpFetcher;	
 	@Mock StopBoardParser stopBoardParser;
 	@Mock StopSearchParser stopSearchParser;
+	@Mock StopMessageParser stopMessageParser;
 	
 	@Mock StopBoard stopBoard;
 	@Mock List<Stop> stops;
@@ -44,7 +46,7 @@ public class CountdownApiTest {
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		api = new CountdownApi(countdownApiUrlBuilder, httpFetcher, stopBoardParser, stopSearchParser);
+		api = new CountdownApi(countdownApiUrlBuilder, httpFetcher, stopBoardParser, stopSearchParser, stopMessageParser);
 	}
 	
 	@Test

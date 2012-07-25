@@ -42,6 +42,7 @@ public class StopBoardParser {
 			return new StopBoard(jsonObject.getLong(LAST_UPDATED), arrivals);
 			
 		} catch (JSONException e) {	
+			e.printStackTrace();
 			throw new ParsingException();
 		}
 	}
