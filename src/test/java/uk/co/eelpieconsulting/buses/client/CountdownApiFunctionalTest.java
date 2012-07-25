@@ -52,7 +52,7 @@ public class CountdownApiFunctionalTest {
 		for (Stop stop : routeStops) {
 			System.out.println(stop.getName());
 		}
-		assertEquals(45, routeStops.size());
+		assertEquals(46, routeStops.size());
 	}
 	
 	@Test
@@ -60,7 +60,7 @@ public class CountdownApiFunctionalTest {
 		final Stop stop = api.findStopById(53550);
 		
 		assertEquals(53550, stop.getId());
-		assertEquals("YORK STREET / TWICKENHAM", stop.getName());
+		assertEquals("York Street / Twickenham", stop.getName());
 	}
 	
 	// Example usage for README file
