@@ -53,6 +53,10 @@ public class CountdownApi {
 		return stopMessageParser.parse(httpFetcher.fetchContent(countdownApiUrlBuilder.getStopMessagesUrl(stopId), "UTF-8"));
 	}
 	
+	public List<Message> getMultipleStopMessages(int[] stopIds) throws HttpFetchException, ParsingException {
+		return stopMessageParser.parse(httpFetcher.fetchContent(countdownApiUrlBuilder.getStopMessagesUrl(stopIds), "UTF-8"));
+	}
+	
 	public List<Stop> getRouteStops(String route, int run) throws HttpFetchException, ParsingException {
 		return stopSearchParser.parse(httpFetcher.fetchContent(countdownApiUrlBuilder.getRoutesStopUrl(route, run), "UTF-8"));
 	}

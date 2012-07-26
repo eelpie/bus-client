@@ -32,4 +32,19 @@ public class CountdownApiUrlBuilder {
 		return getStopUrl(stopId) + "/messages";
 	}
 
+	public String getStopMessagesUrl(int[] stopIds) {
+		return apiUrl + "/messages?stops[]=" + commaSeperate(stopIds);
+	}
+
+	private String commaSeperate(int[] stopIds) {
+		StringBuilder output = new StringBuilder();
+		for (int stopId : stopIds) {
+			if (output.length() > 0) {
+				output.append(",");
+			}
+			output.append(stopId);
+		}
+		return output.toString();
+	}
+
 }
