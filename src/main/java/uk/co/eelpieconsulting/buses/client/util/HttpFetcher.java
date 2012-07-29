@@ -1,10 +1,7 @@
 package uk.co.eelpieconsulting.buses.client.util;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.http.Header;
@@ -15,6 +12,7 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpResponseInterceptor;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -24,6 +22,7 @@ import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HttpContext;
+import org.apache.http.util.EntityUtils;
 
 import uk.co.eelpieconsulting.buses.client.exceptions.HttpFetchException;
 
@@ -35,39 +34,23 @@ public class HttpFetcher {
 	}
 	
 	public String fetchContent(String url, String charEncoding) throws HttpFetchException {
-		InputStream inputStream = httpFetch(url);
-		if (inputStream != null) {
-			try {
-				return readResponseBody(charEncoding, inputStream);
-			} catch (UnsupportedEncodingException e) {
-				//log.error(e);
-				e.printStackTrace();
-				throw new HttpFetchException();
-			} catch (IOException e) {
-				//log.error(e);
-				throw new HttpFetchException();
-			}			
-		}
-		return null;
+		return httpFetch(url);		
 	}
 	
-	private InputStream httpFetch(String uri) throws HttpFetchException {
+	private String httpFetch(String uri) throws HttpFetchException {
 		try {
-			//log.info("Making http fetch of: " + uri);
-			HttpGet get = new HttpGet(uri);
-
-			get.addHeader(new BasicHeader("User-agent", "gzip"));
+			final HttpGet get = new HttpGet(uri);
 			get.addHeader(new BasicHeader("Accept-Encoding", "gzip"));
 
-			HttpResponse execute = executeRequest(get);
-			final int statusCode = execute.getStatusLine().getStatusCode();
-			if (statusCode == 200) {
-				return execute.getEntity().getContent();
+			final HttpResponse response = executeRequest(get);
+			final int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == HttpStatus.SC_OK) {
+				return new String(EntityUtils.toByteArray(response.getEntity()), "UTF-8");
 			}
-
-			//log.warn("Fetch of '" + uri + "' failed: " + statusCode);
+			
+			EntityUtils.consume(response.getEntity());			
 			throw new HttpFetchException();	// TODO be more specific. ie HTTP/1.1 416 Requested Range Not Satisfiable
-
+			
 		} catch (Exception e) {
 			throw new HttpFetchException();
 		}		
@@ -109,21 +92,7 @@ public class HttpFetcher {
 		client.getParams().setParameter("http.socket.timeout", new Integer(HTTP_TIMEOUT));
 		client.getParams().setParameter("http.connection.timeout", new Integer(HTTP_TIMEOUT));
 		return client;
-	}
-	
-	private String readResponseBody(String pageCharacterEncoding, InputStream inputStream) throws UnsupportedEncodingException, IOException {
-		final StringBuilder output = new StringBuilder();
-		final InputStreamReader input = new InputStreamReader(inputStream, pageCharacterEncoding);
-		final BufferedReader reader = new BufferedReader(input);
-
-		String line = "";
-		while ((line = reader.readLine()) != null) {
-			output.append(line);
-			output.append("\n");
-		}
-		reader.close();
-		return output.toString();
-		}
+	}	
 
 	private static class GzipDecompressingEntity extends HttpEntityWrapper {
 
