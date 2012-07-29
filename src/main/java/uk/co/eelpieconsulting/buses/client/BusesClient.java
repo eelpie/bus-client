@@ -8,28 +8,28 @@ import uk.co.eelpieconsulting.buses.client.model.StopBoard;
 import uk.co.eelpieconsulting.buses.client.parsers.StopBoardParser;
 import uk.co.eelpieconsulting.buses.client.parsers.StopMessageParser;
 import uk.co.eelpieconsulting.buses.client.parsers.StopSearchParser;
-import uk.co.eelpieconsulting.buses.client.urls.CountdownApiUrlBuilder;
+import uk.co.eelpieconsulting.buses.client.urls.UrlBuilder;
 import uk.co.eelpieconsulting.buses.client.util.HttpFetcher;
 import uk.co.eelpieconsulting.busroutes.model.Message;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
 
-public class CountdownApi {
+public class BusesClient {
 	
-	final private CountdownApiUrlBuilder countdownApiUrlBuilder;
+	final private UrlBuilder countdownApiUrlBuilder;
 	final private HttpFetcher httpFetcher;
 	final private StopBoardParser stopBoardParser;
 	final private StopSearchParser stopSearchParser;
 	final private StopMessageParser stopMessageParser;
 
-	public CountdownApi(String apiUrl) {
-		this.countdownApiUrlBuilder = new CountdownApiUrlBuilder(apiUrl);
+	public BusesClient(String apiUrl) {
+		this.countdownApiUrlBuilder = new UrlBuilder(apiUrl);
 		this.httpFetcher = new HttpFetcher();
 		this.stopBoardParser = new StopBoardParser();
 		this.stopSearchParser = new StopSearchParser();
 		this.stopMessageParser = new StopMessageParser();
 	}
 	
-	public CountdownApi(CountdownApiUrlBuilder countdownApiUrlBuilder, HttpFetcher httpFetcher, StopBoardParser stopBoardParser, StopSearchParser stopSearchParser, StopMessageParser stopMessageParser) {
+	public BusesClient(UrlBuilder countdownApiUrlBuilder, HttpFetcher httpFetcher, StopBoardParser stopBoardParser, StopSearchParser stopSearchParser, StopMessageParser stopMessageParser) {
 		this.countdownApiUrlBuilder = countdownApiUrlBuilder;
 		this.httpFetcher = httpFetcher;
 		this.stopBoardParser = stopBoardParser;

@@ -1,10 +1,10 @@
 package uk.co.eelpieconsulting.buses.client.urls;
 
-public class CountdownApiUrlBuilder {
+public class UrlBuilder {
 	
 	private String apiUrl;
 
-	public CountdownApiUrlBuilder(String apiUrl) {
+	public UrlBuilder(String apiUrl) {
 		this.apiUrl = apiUrl;
 	}
 	

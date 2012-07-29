@@ -5,16 +5,16 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.co.eelpieconsulting.buses.client.urls.CountdownApiUrlBuilder;
+import uk.co.eelpieconsulting.buses.client.urls.UrlBuilder;
 
-public class CountdownApiUrlBuilderTest {
+public class UrlBuilderTest {
 
 	private static final String API_HOST = "http://buses.eelpieconsulting.co.uk";
-	private CountdownApiUrlBuilder urlBuilder;
+	private UrlBuilder urlBuilder;
 	
 	@Before
 	public void setup() {
-		urlBuilder = new CountdownApiUrlBuilder(API_HOST);
+		urlBuilder = new UrlBuilder(API_HOST);
 	}
 	
 	@Test
