@@ -9,20 +9,30 @@ import org.json.JSONObject;
 
 import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.busroutes.model.Message;
+import uk.co.eelpieconsulting.busroutes.model.MultiStopMessage;
+import uk.co.eelpieconsulting.busroutes.model.Stop;
 
 public class StopMessageParser {
 
+	private StopParser stopParser;
+	
+	public StopMessageParser() {
+		this.stopParser = new StopParser();
+	}
+	
 	private static final String ID = "id";
 	private static final String STOP_ID = "stopId";
 	private static final String MESSAGE = "message";
 	private static final String PRIORITY = "priority";
 	private static final String END_DATE = "endDate";
 	private static final String START_DATE = "startDate";
+	private static final String STOPS = "stops";
 
-	public List<Message> parse(final String json) throws ParsingException {
+	public List<MultiStopMessage> parse(final String json) throws ParsingException {
+		System.out.println(json);
 		try {
 			JSONArray messagesJson = new JSONArray(json);
-			final List<Message> messages = new ArrayList<Message>();
+			final List<MultiStopMessage> messages = new ArrayList<MultiStopMessage>();
 			for (int i = 0; i < messagesJson.length(); i++) {
 				JSONObject messageJson = messagesJson.getJSONObject(i);
 				final Message message = new Message(messageJson.getString(ID),
@@ -31,12 +41,19 @@ public class StopMessageParser {
 								.getInt(PRIORITY), messageJson
 								.getLong(START_DATE), messageJson
 								.getLong(END_DATE));
-				messages.add(message);
+								
+				final MultiStopMessage multiStopMessage = new MultiStopMessage(message.getId(), message);	 // TODO constructor not the most useful
+				if (messageJson.has(STOPS)) {
+					final List<Stop> parsedStopList = stopParser.parseStopList(messageJson.getJSONArray(STOPS));
+					for (Stop stop : parsedStopList) {
+						multiStopMessage.addStop(stop);						
+					}
+				}
+				messages.add(multiStopMessage);
 			}
 			return messages;
 			
 		} catch (JSONException e) {
-			System.out.println(e.getMessage());
 			throw new ParsingException();
 		}
 	}

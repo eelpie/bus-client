@@ -16,7 +16,7 @@ import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.buses.client.model.StopBoard;
 import uk.co.eelpieconsulting.buses.client.parsers.StopBoardParser;
 import uk.co.eelpieconsulting.buses.client.parsers.StopMessageParser;
-import uk.co.eelpieconsulting.buses.client.parsers.StopSearchParser;
+import uk.co.eelpieconsulting.buses.client.parsers.StopParser;
 import uk.co.eelpieconsulting.buses.client.urls.UrlBuilder;
 import uk.co.eelpieconsulting.buses.client.util.HttpFetcher;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
@@ -35,7 +35,7 @@ public class BusesClientTest {
 	@Mock UrlBuilder countdownApiUrlBuilder;
 	@Mock HttpFetcher httpFetcher;	
 	@Mock StopBoardParser stopBoardParser;
-	@Mock StopSearchParser stopSearchParser;
+	@Mock StopParser stopSearchParser;
 	@Mock StopMessageParser stopMessageParser;
 	
 	@Mock StopBoard stopBoard;

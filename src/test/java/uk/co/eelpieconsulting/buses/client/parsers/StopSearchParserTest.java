@@ -9,24 +9,24 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.co.eelpieconsulting.buses.client.parsers.StopSearchParser;
+import uk.co.eelpieconsulting.buses.client.parsers.StopParser;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
 
 public class StopSearchParserTest {
 
-	private StopSearchParser stopSearchParser;
+	private StopParser stopSearchParser;
 
 	@Before
 	public void setup() {
-		stopSearchParser = new StopSearchParser();
+		stopSearchParser = new StopParser();
 	}
 		
 	@Test
 	public void canParseMarkerSearchResultsIntoListOfStops() throws Exception {
 		final List<Stop> stops = stopSearchParser.parse(ContentLoader.loadContent("marker_search.json"));
-		assertEquals(26, stops.size());
+		assertEquals(27, stops.size());
 		
-		final Stop stop = stops.get(0);
+		final Stop stop = stops.get(1);
 		assertEquals(49948, stop.getId());
 		assertEquals("POPES GROTTO", stop.getName());
 		assertEquals(51.44231079780184, stop.getLatitude(), 0);

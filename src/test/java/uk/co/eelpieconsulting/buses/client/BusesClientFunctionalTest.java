@@ -52,7 +52,7 @@ public class BusesClientFunctionalTest {
 		for (Stop stop : routeStops) {
 			System.out.println(stop.getName());
 		}
-		assertEquals(46, routeStops.size());
+		assertEquals(47, routeStops.size());
 	}
 	
 	@Test

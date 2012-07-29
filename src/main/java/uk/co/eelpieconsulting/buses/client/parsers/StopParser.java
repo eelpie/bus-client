@@ -11,7 +11,7 @@ import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.busroutes.model.Route;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
 
-public class StopSearchParser {
+public class StopParser {
 
 	private static final String STOP_ID = "id";
 	private static final String STOP_NAME = "name";
@@ -22,25 +22,29 @@ public class StopSearchParser {
 		
 	public List<Stop> parse(String json) throws ParsingException {
 		try {
-			final JSONArray stopsJson = new JSONArray(json);			
-
-			final List<Stop> stops = new ArrayList<Stop>();
-			for (int i = 1; i < stopsJson.length(); i++) {
-				stops.add(parseSingleStop(stopsJson.getJSONObject(i)));
-			}			
-			return stops;
+			final JSONArray stopsJson = new JSONArray(json);
+			return parseStopList(stopsJson);
 			
 		} catch (JSONException e) {			
 			throw new ParsingException();
 		}
 	}
-
+	
 	public Stop parseStop(String json) throws ParsingException {
 		try {
 			return parseSingleStop(new JSONObject(json));
 		} catch (JSONException e) {
 			throw new ParsingException();
 		}
+	}
+	
+	List<Stop> parseStopList(final JSONArray stopsJson)
+			throws JSONException {
+		final List<Stop> stops = new ArrayList<Stop>();
+		for (int i = 0; i < stopsJson.length(); i++) {
+			stops.add(parseSingleStop(stopsJson.getJSONObject(i)));
+		}			
+		return stops;
 	}
 	
 	private Stop parseSingleStop(final JSONObject stopJson) throws JSONException {		
