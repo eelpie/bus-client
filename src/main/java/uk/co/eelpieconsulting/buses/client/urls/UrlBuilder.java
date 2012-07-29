@@ -33,7 +33,7 @@ public class UrlBuilder {
 	}
 
 	public String getStopMessagesUrl(int[] stopIds) {
-		return apiUrl + "/messages?stops[]=" + commaSeperate(stopIds);
+		return apiUrl + "/messages?stops=" + commaSeperate(stopIds);
 	}
 
 	private String commaSeperate(int[] stopIds) {
