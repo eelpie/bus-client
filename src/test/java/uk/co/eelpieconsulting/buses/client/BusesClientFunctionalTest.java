@@ -63,6 +63,15 @@ public class BusesClientFunctionalTest {
 		assertEquals("York Street / Twickenham", stop.getName());
 	}
 	
+	@Test
+	public void canSearchForStopById() throws Exception {
+		List<Stop> results = api.searchStops("53550");
+		
+		Stop stop = results.get(0);
+		assertEquals(53550, stop.getId());
+		assertEquals("York Street / Twickenham", stop.getName());
+	}
+	
 	// Example usage for README file
 	@Test
 	public void exampleUsage() throws Exception {

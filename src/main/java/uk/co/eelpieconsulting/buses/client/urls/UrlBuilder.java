@@ -1,5 +1,8 @@
 package uk.co.eelpieconsulting.buses.client.urls;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class UrlBuilder {
 	
 	private String apiUrl;
@@ -35,7 +38,19 @@ public class UrlBuilder {
 	public String getStopMessagesUrl(int[] stopIds) {
 		return apiUrl + "/messages?stops=" + commaSeperate(stopIds);
 	}
+	
+	public String getStopSearchUrl(String q) {
+		return apiUrl + "/stops/search?q=" + urlEncode(q);
+	}
 
+	private String urlEncode(String q) {
+		try {
+			return URLEncoder.encode(q, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	private String commaSeperate(int[] stopIds) {
 		StringBuilder output = new StringBuilder();
 		for (int stopId : stopIds) {
@@ -46,5 +61,5 @@ public class UrlBuilder {
 		}
 		return output.toString();
 	}
-
+	
 }

@@ -41,5 +41,9 @@ public class UrlBuilderTest {
 	public void canConstructMultipleStopMessagesUrl() throws Exception {
 		assertEquals("http://buses.eelpieconsulting.co.uk/messages?stops=53550,53551", urlBuilder.getStopMessagesUrl(new int[] {53550, 53551}));
 	}
-
+	
+	@Test
+	public void canConstructStopSearchUrl() throws Exception {
+		assertEquals("http://buses.eelpieconsulting.co.uk/stops/search?q=53550", urlBuilder.getStopSearchUrl("53550"));
+	}
 }

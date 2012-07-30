@@ -10,7 +10,6 @@ import uk.co.eelpieconsulting.buses.client.parsers.StopMessageParser;
 import uk.co.eelpieconsulting.buses.client.parsers.StopParser;
 import uk.co.eelpieconsulting.buses.client.urls.UrlBuilder;
 import uk.co.eelpieconsulting.buses.client.util.HttpFetcher;
-import uk.co.eelpieconsulting.busroutes.model.Message;
 import uk.co.eelpieconsulting.busroutes.model.MultiStopMessage;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
 
@@ -45,7 +44,11 @@ public class BusesClient {
 	public List<Stop> findStopsWithin(double latitude, double longitude, int radius) throws HttpFetchException, ParsingException {
 		return stopSearchParser.parse(httpFetcher.fetchContent(countdownApiUrlBuilder.getMarkerSearchUrl(latitude, longitude, radius), "UTF-8"));
 	}
-
+	
+	public List<Stop> searchStops(String q) throws HttpFetchException, ParsingException {
+		return stopSearchParser.parse(httpFetcher.fetchContent(countdownApiUrlBuilder.getStopSearchUrl(q), "UTF-8"));
+	}
+	
 	public Stop findStopById(int id) throws HttpFetchException, ParsingException {
 		return stopSearchParser.parseStop(httpFetcher.fetchContent(countdownApiUrlBuilder.getStopIdSearchUrl(id), "UTF-8"));
 	}
