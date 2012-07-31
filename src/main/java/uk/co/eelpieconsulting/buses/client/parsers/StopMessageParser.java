@@ -29,7 +29,6 @@ public class StopMessageParser {
 	private static final String STOPS = "stops";
 
 	public List<MultiStopMessage> parse(final String json) throws ParsingException {
-		System.out.println(json);
 		try {
 			JSONArray messagesJson = new JSONArray(json);
 			final List<MultiStopMessage> messages = new ArrayList<MultiStopMessage>();

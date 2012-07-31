@@ -3,6 +3,7 @@ package uk.co.eelpieconsulting.buses.client;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class BusesClientFunctionalTest {
 		
 		assertNotNull(stopBoard);		
 		for (Arrival arrival : stopBoard.getArrivals()) {
-			System.out.println(arrival);
+			System.out.println(arrival.getRoute().getRoute() + " towards " + arrival.getRoute().getTowards() + ": " + arrival.getEstimatedWait());
 		}
 	}
 	
@@ -53,6 +54,19 @@ public class BusesClientFunctionalTest {
 			System.out.println(stop.getName());
 		}
 		assertEquals(47, routeStops.size());
+	}
+	
+	@Test
+	public void routeStopsShowOnlyRouteCorrectlyTest() throws Exception {
+		final List<Stop> routeStops = api.getRouteStops("267", 1);
+		for (Stop stop : routeStops) {
+			if (stop.getName().toUpperCase().equals("WHITTON ROAD")) {				
+				assertEquals(1, stop.getRoutes().size());
+				assertEquals("267", stop.getRoutes().iterator().next().getRoute());
+				return;
+			}
+		}
+		fail();
 	}
 	
 	@Test

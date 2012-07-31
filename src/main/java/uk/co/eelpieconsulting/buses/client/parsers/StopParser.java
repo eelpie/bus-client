@@ -38,8 +38,7 @@ public class StopParser {
 		}
 	}
 	
-	List<Stop> parseStopList(final JSONArray stopsJson)
-			throws JSONException {
+	List<Stop> parseStopList(final JSONArray stopsJson) throws JSONException {
 		final List<Stop> stops = new ArrayList<Stop>();
 		for (int i = 0; i < stopsJson.length(); i++) {
 			stops.add(parseSingleStop(stopsJson.getJSONObject(i)));
@@ -57,7 +56,7 @@ public class StopParser {
 		
 		if (stopJson.has("routes")) {
 			JSONArray jsonRoutes = stopJson.getJSONArray("routes");
-			for (int i = 1; i < jsonRoutes.length(); i++) {
+			for (int i = 0; i < jsonRoutes.length(); i++) {
 				final JSONObject jsonRoute = jsonRoutes.getJSONObject(i);
 				stop.addRoute(new Route(jsonRoute.getString("route"), jsonRoute.getInt("run"), jsonRoute.getString("towards")));
 			}	
