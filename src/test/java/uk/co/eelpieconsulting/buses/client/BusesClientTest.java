@@ -14,6 +14,7 @@ import uk.co.eelpieconsulting.buses.client.BusesClient;
 import uk.co.eelpieconsulting.buses.client.exceptions.HttpFetchException;
 import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.buses.client.model.StopBoard;
+import uk.co.eelpieconsulting.buses.client.parsers.RouteParser;
 import uk.co.eelpieconsulting.buses.client.parsers.StopBoardParser;
 import uk.co.eelpieconsulting.buses.client.parsers.StopMessageParser;
 import uk.co.eelpieconsulting.buses.client.parsers.StopParser;
@@ -37,6 +38,7 @@ public class BusesClientTest {
 	@Mock StopBoardParser stopBoardParser;
 	@Mock StopParser stopSearchParser;
 	@Mock StopMessageParser stopMessageParser;
+	@Mock RouteParser routeParser;
 	
 	@Mock StopBoard stopBoard;
 	@Mock List<Stop> stops;
@@ -46,7 +48,7 @@ public class BusesClientTest {
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		api = new BusesClient(countdownApiUrlBuilder, httpFetcher, stopBoardParser, stopSearchParser, stopMessageParser);
+		api = new BusesClient(countdownApiUrlBuilder, httpFetcher, stopBoardParser, stopSearchParser, stopMessageParser, routeParser);
 	}
 	
 	@Test

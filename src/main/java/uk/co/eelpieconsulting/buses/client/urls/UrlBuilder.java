@@ -23,6 +23,10 @@ public class UrlBuilder {
 		return apiUrl + "/stops/near?latitude=" + latitude + "&longitude=" + longitude;
 	}
 	
+	public String getNearbyRoutesUrl(double latitude, double longitude, int radius) {
+		return apiUrl + "/routes/near?latitude=" + latitude + "&longitude=" + longitude;
+	}
+	
 	public String getStopIdSearchUrl(int id) {
 		return apiUrl + "/stop/" + id;				
 	}

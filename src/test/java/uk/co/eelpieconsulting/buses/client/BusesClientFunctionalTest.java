@@ -10,9 +10,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.co.eelpieconsulting.buses.client.BusesClient;
 import uk.co.eelpieconsulting.buses.client.model.Arrival;
 import uk.co.eelpieconsulting.buses.client.model.StopBoard;
+import uk.co.eelpieconsulting.busroutes.model.Route;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
 
 public class BusesClientFunctionalTest {
@@ -37,13 +37,24 @@ public class BusesClientFunctionalTest {
 	}
 	
 	@Test
-	public void stopSearchTest() throws Exception {
+	public void  nearbyStopSearchTest() throws Exception {
 		List<Stop> stops = api.findStopsWithin(51.454, -0.351, 1000);
 		
 		assertNotNull(stops);
 		assertFalse(stops.isEmpty());
 		for (Stop stop : stops) {
 			System.out.println(stop);
+		}
+	}
+	
+	@Test
+	public void canFindNearbyRoutes() throws Exception {
+		List<Route> routes = api.findRoutesWithin(51.454, -0.351, 1000);
+		
+		assertNotNull(routes);
+		assertFalse(routes.isEmpty());
+		for (Route route : routes) {
+			System.out.println(route);
 		}
 	}
 	
@@ -55,7 +66,7 @@ public class BusesClientFunctionalTest {
 		}
 		assertEquals(47, routeStops.size());
 	}
-	
+		
 	@Test
 	public void routeStopsShowOnlyRouteCorrectlyTest() throws Exception {
 		final List<Stop> routeStops = api.getRouteStops("267", 1);

@@ -28,6 +28,11 @@ public class UrlBuilderTest {
 	}
 	
 	@Test
+	public void canConstructUrlForNearbyRoutesSearch() throws Exception {
+		assertEquals("http://buses.eelpieconsulting.co.uk/routes/near?latitude=51.454&longitude=-0.351", urlBuilder.getNearbyRoutesUrl(51.454, -0.351, 250));
+	}
+	
+	@Test
 	public void canConstructUrlForStopIdSearch() throws Exception {
 		assertEquals("http://buses.eelpieconsulting.co.uk/stop/53550", urlBuilder.getStopIdSearchUrl(53550));
 	}
