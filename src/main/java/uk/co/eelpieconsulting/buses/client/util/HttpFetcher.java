@@ -49,11 +49,11 @@ public class HttpFetcher {
 			}
 			
 			EntityUtils.consume(response.getEntity());			
-			throw new HttpFetchException();	// TODO be more specific. ie HTTP/1.1 416 Requested Range Not Satisfiable
+			throw new HttpFetchException(new RuntimeException("Unexpected http response code: " + statusCode));	// TODO be more specific. ie HTTP/1.1 416 Requested Range Not Satisfiable
 			
 		} catch (Exception e) {
-			throw new HttpFetchException();
-		}		
+			throw new HttpFetchException(e);
+		}
 	}
 	
 	private HttpResponse executeRequest(HttpRequestBase request) throws IOException, ClientProtocolException {

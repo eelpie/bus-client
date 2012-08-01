@@ -42,6 +42,7 @@ public class BusesClientTest {
 	
 	@Mock StopBoard stopBoard;
 	@Mock List<Stop> stops;
+	@Mock Exception cause;
 	
 	private BusesClient api;
 	
@@ -65,7 +66,7 @@ public class BusesClientTest {
 	@Test(expected = HttpFetchException.class)
 	public void shouldThrowInformativeExceptionIfHttpFetchFails() throws Exception {
 		when(countdownApiUrlBuilder.getStopBoardUrl(STOPBOARD_ID)).thenReturn(STOPBOARD_URL);
-		when(httpFetcher.fetchContent(STOPBOARD_URL, "UTF-8")).thenThrow(new HttpFetchException());
+		when(httpFetcher.fetchContent(STOPBOARD_URL, "UTF-8")).thenThrow(new HttpFetchException(cause));
 		
 		api.getStopBoard(STOPBOARD_ID);
 	}
