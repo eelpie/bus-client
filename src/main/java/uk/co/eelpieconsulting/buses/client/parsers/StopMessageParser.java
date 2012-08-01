@@ -14,7 +14,7 @@ import uk.co.eelpieconsulting.busroutes.model.Stop;
 
 public class StopMessageParser {
 
-	private StopParser stopParser;
+	private final StopParser stopParser;
 	
 	public StopMessageParser() {
 		this.stopParser = new StopParser();

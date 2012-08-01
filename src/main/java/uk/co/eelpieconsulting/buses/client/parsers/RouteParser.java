@@ -7,22 +7,31 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.busroutes.model.Route;
 
 public class RouteParser {
 
-	public List<Route> parse(String json) throws JSONException {
+	private static final String TOWARDS = "towards";
+	private static final String RUN = "run";
+	private static final String ROUTE = "route";
+	
+	public List<Route> parse(String json) throws ParsingException {
 		List<Route> routes = new ArrayList<Route>();
-		final JSONArray jsonRoutes = new JSONArray(json);
-		for (int i = 0; i < jsonRoutes.length(); i++) {
-			final JSONObject jsonRoute = jsonRoutes.getJSONObject(i);
-			routes.add(parseRoute(jsonRoute));
+		try {
+			JSONArray jsonRoutes = new JSONArray(json);
+			for (int i = 0; i < jsonRoutes.length(); i++) {
+				final JSONObject jsonRoute = jsonRoutes.getJSONObject(i);
+				routes.add(parseRoute(jsonRoute));
+			}
+		} catch (JSONException e) {
+			throw new ParsingException();
 		}
 		return routes;
 	}
 	
-	private Route parseRoute(JSONObject jsonRoute) throws JSONException {		// TODO duplicated with StopParser
-		return new Route(jsonRoute.getString("route"), jsonRoute.getInt("run"), jsonRoute.getString("towards"));
+	Route parseRoute(JSONObject jsonRoute) throws JSONException {	// TODO duplicated with StopParser
+		return new Route(jsonRoute.getString(ROUTE), jsonRoute.getInt(RUN), jsonRoute.getString(TOWARDS));
 	}
 	
 }

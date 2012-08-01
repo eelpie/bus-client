@@ -2,8 +2,6 @@ package uk.co.eelpieconsulting.buses.client;
 
 import java.util.List;
 
-import org.json.JSONException;
-
 import uk.co.eelpieconsulting.buses.client.exceptions.HttpFetchException;
 import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.buses.client.model.StopBoard;
@@ -52,7 +50,7 @@ public class BusesClient {
 		return stopSearchParser.parse(httpFetcher.fetchContent(countdownApiUrlBuilder.getMarkerSearchUrl(latitude, longitude, radius), "UTF-8"));
 	}
 	
-	public List<Route> findRoutesWithin(double latitude, double longitude, int radius) throws HttpFetchException, JSONException {
+	public List<Route> findRoutesWithin(double latitude, double longitude, int radius) throws HttpFetchException, ParsingException {
 		return routeParser.parse(httpFetcher.fetchContent(countdownApiUrlBuilder.getNearbyRoutesUrl(latitude, longitude, radius), "UTF-8"));
 	}
 	

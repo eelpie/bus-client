@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
-import uk.co.eelpieconsulting.busroutes.model.Route;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
 
 public class StopParser {
@@ -19,7 +18,13 @@ public class StopParser {
 	private static final String STOP_INDICATOR = "indicator";
 	private static final String LATITUDE = "latitude";
 	private static final String LONGITUDE = "longitude";
-		
+
+	private final RouteParser routeParser;
+	
+	public StopParser() {
+		this.routeParser = new RouteParser();
+	}
+	
 	public List<Stop> parse(String json) throws ParsingException {
 		try {
 			final JSONArray stopsJson = new JSONArray(json);
@@ -58,8 +63,8 @@ public class StopParser {
 			JSONArray jsonRoutes = stopJson.getJSONArray("routes");
 			for (int i = 0; i < jsonRoutes.length(); i++) {
 				final JSONObject jsonRoute = jsonRoutes.getJSONObject(i);
-				stop.addRoute(new Route(jsonRoute.getString("route"), jsonRoute.getInt("run"), jsonRoute.getString("towards")));
-			}	
+				stop.addRoute(routeParser.parseRoute(jsonRoute));
+			}
 		}
 		
 		return stop;
