@@ -57,7 +57,7 @@ public class StopParser {
 					stopJson.has(TOWARDS) ? stopJson.getString(TOWARDS) : null,
 					stopJson.isNull(STOP_INDICATOR) ? null : stopJson.getString(STOP_INDICATOR), 
 					stopJson.getDouble(LATITUDE), stopJson.getDouble(LONGITUDE), 
-					null, null);
+					null, null, null);
 		
 		if (stopJson.has("routes")) {
 			JSONArray jsonRoutes = stopJson.getJSONArray("routes");
