@@ -10,8 +10,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import uk.co.eelpieconsulting.buses.client.BusesClient;
-import uk.co.eelpieconsulting.buses.client.exceptions.HttpFetchException;
 import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.buses.client.model.StopBoard;
 import uk.co.eelpieconsulting.buses.client.parsers.RouteParser;
@@ -19,8 +17,9 @@ import uk.co.eelpieconsulting.buses.client.parsers.StopBoardParser;
 import uk.co.eelpieconsulting.buses.client.parsers.StopMessageParser;
 import uk.co.eelpieconsulting.buses.client.parsers.StopParser;
 import uk.co.eelpieconsulting.buses.client.urls.UrlBuilder;
-import uk.co.eelpieconsulting.buses.client.util.HttpFetcher;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
+import uk.co.eelpieconsulting.common.http.HttpFetchException;
+import uk.co.eelpieconsulting.common.http.HttpFetcher;
 
 public class BusesClientTest {
 	
@@ -55,7 +54,7 @@ public class BusesClientTest {
 	@Test
 	public void canFetchStopboardFromLiveApiEndpoints() throws Exception {		
 		when(countdownApiUrlBuilder.getStopBoardUrl(STOPBOARD_ID)).thenReturn(STOPBOARD_URL);
-		when(httpFetcher.fetchContent(STOPBOARD_URL, "UTF-8")).thenReturn(STOPBOARD_JSON);
+		when(httpFetcher.fetchContent(STOPBOARD_URL)).thenReturn(STOPBOARD_JSON);
 		when(stopBoardParser.parse(STOPBOARD_JSON)).thenReturn(stopBoard);
 		
 		StopBoard returnedStopBoard = api.getStopBoard(STOPBOARD_ID);
@@ -66,7 +65,7 @@ public class BusesClientTest {
 	@Test(expected = HttpFetchException.class)
 	public void shouldThrowInformativeExceptionIfHttpFetchFails() throws Exception {
 		when(countdownApiUrlBuilder.getStopBoardUrl(STOPBOARD_ID)).thenReturn(STOPBOARD_URL);
-		when(httpFetcher.fetchContent(STOPBOARD_URL, "UTF-8")).thenThrow(new HttpFetchException(cause));
+		when(httpFetcher.fetchContent(STOPBOARD_URL)).thenThrow(new HttpFetchException());
 		
 		api.getStopBoard(STOPBOARD_ID);
 	}
@@ -74,7 +73,7 @@ public class BusesClientTest {
 	@Test(expected = ParsingException.class)
 	public void shouldThrowInformativeExceptionIfParsingFails() throws Exception {
 		when(countdownApiUrlBuilder.getStopBoardUrl(STOPBOARD_ID)).thenReturn(STOPBOARD_URL);
-		when(httpFetcher.fetchContent(STOPBOARD_URL, "UTF-8")).thenReturn(STOPBOARD_JSON);
+		when(httpFetcher.fetchContent(STOPBOARD_URL)).thenReturn(STOPBOARD_JSON);
 		when(stopBoardParser.parse(STOPBOARD_JSON)).thenThrow(new ParsingException());
 		
 		api.getStopBoard(STOPBOARD_ID);
@@ -83,7 +82,7 @@ public class BusesClientTest {
 	@Test
 	public void canSearchForStopsWithinBoundingBox() throws Exception {
 		when(countdownApiUrlBuilder.getMarkerSearchUrl(LAT, LNG, RADIUS)).thenReturn(STOP_SEARCH_URL);
-		when(httpFetcher.fetchContent(STOP_SEARCH_URL, "UTF-8")).thenReturn(STOP_SEARCH_JSON);
+		when(httpFetcher.fetchContent(STOP_SEARCH_URL)).thenReturn(STOP_SEARCH_JSON);
 		when(stopSearchParser.parse(STOP_SEARCH_JSON)).thenReturn(stops);
 		
 		List<Stop> returnedStops = api.findStopsWithin(LAT, LNG, RADIUS);

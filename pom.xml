@@ -5,7 +5,7 @@
 	<artifactId>client</artifactId>
 	<packaging>jar</packaging>
 	<name>Buses client</name>
-	<version>1.7</version>
+	<version>1.8</version>
 	<build>
 		<plugins>
 			<plugin>
@@ -25,7 +25,11 @@
 			<artifactId>model</artifactId>
 			<version>1.0</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>uk.co.eelpieconsulting.common</groupId>
+			<artifactId>common-http</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
@@ -45,12 +49,6 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.1.2</version>
-		</dependency>		
 	</dependencies>
 	
 </project>
