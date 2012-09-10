@@ -46,7 +46,11 @@ public class UrlBuilder {
 	public String getStopSearchUrl(String q) {
 		return apiUrl + "/stops/search?q=" + urlEncode(q);
 	}
-
+	
+	public String getSourceFileInformationUrl() {
+		return apiUrl + "/sources";
+	}
+	
 	private String urlEncode(String q) {
 		try {
 			return URLEncoder.encode(q, "UTF-8");

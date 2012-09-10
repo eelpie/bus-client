@@ -51,4 +51,10 @@ public class UrlBuilderTest {
 	public void canConstructStopSearchUrl() throws Exception {
 		assertEquals("http://buses.eelpieconsulting.co.uk/stops/search?q=53550", urlBuilder.getStopSearchUrl("53550"));
 	}
+	
+	@Test
+	public void canSourceFileInformationUrl() throws Exception {
+		assertEquals("http://buses.eelpieconsulting.co.uk/sources", urlBuilder.getSourceFileInformationUrl());
+	}
+	
 }

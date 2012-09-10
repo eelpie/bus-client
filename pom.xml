@@ -5,7 +5,7 @@
 	<artifactId>client</artifactId>
 	<packaging>jar</packaging>
 	<name>Buses client</name>
-	<version>1.8</version>
+	<version>1.9</version>
 	<build>
 		<plugins>
 			<plugin>
