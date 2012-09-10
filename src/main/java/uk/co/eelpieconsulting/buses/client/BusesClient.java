@@ -48,39 +48,39 @@ public class BusesClient {
 	}
 	
 	public StopBoard getStopBoard(int stopId) throws HttpFetchException, ParsingException {
-		return stopBoardParser.parse(httpFetcher.fetchContent(urlBuilder.getStopBoardUrl(stopId)));
+		return stopBoardParser.parse(httpFetcher.get(urlBuilder.getStopBoardUrl(stopId)));
 	}
 
 	public List<Stop> findStopsWithin(double latitude, double longitude, int radius) throws HttpFetchException, ParsingException {
-		return stopSearchParser.parse(httpFetcher.fetchContent(urlBuilder.getMarkerSearchUrl(latitude, longitude, radius)));
+		return stopSearchParser.parse(httpFetcher.get(urlBuilder.getMarkerSearchUrl(latitude, longitude, radius)));
 	}
 	
 	public List<Route> findRoutesWithin(double latitude, double longitude, int radius) throws HttpFetchException, ParsingException {
-		return routeParser.parse(httpFetcher.fetchContent(urlBuilder.getNearbyRoutesUrl(latitude, longitude, radius)));
+		return routeParser.parse(httpFetcher.get(urlBuilder.getNearbyRoutesUrl(latitude, longitude, radius)));
 	}
 	
 	public List<Stop> searchStops(String q) throws HttpFetchException, ParsingException {
-		return stopSearchParser.parse(httpFetcher.fetchContent(urlBuilder.getStopSearchUrl(q)));
+		return stopSearchParser.parse(httpFetcher.get(urlBuilder.getStopSearchUrl(q)));
 	}
 	
 	public Stop findStopById(int id) throws HttpFetchException, ParsingException {
-		return stopSearchParser.parseStop(httpFetcher.fetchContent(urlBuilder.getStopIdSearchUrl(id)));
+		return stopSearchParser.parseStop(httpFetcher.get(urlBuilder.getStopIdSearchUrl(id)));
 	}
 	
 	public List<MultiStopMessage> getStopMessages(int stopId) throws HttpFetchException, ParsingException {
-		return stopMessageParser.parse(httpFetcher.fetchContent(urlBuilder.getStopMessagesUrl(stopId)));
+		return stopMessageParser.parse(httpFetcher.get(urlBuilder.getStopMessagesUrl(stopId)));
 	}
 	
 	public List<MultiStopMessage> getMultipleStopMessages(int[] stopIds) throws HttpFetchException, ParsingException {
-		return stopMessageParser.parse(httpFetcher.fetchContent(urlBuilder.getStopMessagesUrl(stopIds)));
+		return stopMessageParser.parse(httpFetcher.get(urlBuilder.getStopMessagesUrl(stopIds)));
 	}
 	
 	public List<Stop> getRouteStops(String route, int run) throws HttpFetchException, ParsingException {
-		return stopSearchParser.parse(httpFetcher.fetchContent(urlBuilder.getRoutesStopUrl(route, run)));
+		return stopSearchParser.parse(httpFetcher.get(urlBuilder.getRoutesStopUrl(route, run)));
 	}
 	
 	public List<FileInformation> getSourceFileInformation() throws HttpFetchException, ParsingException {
-		return sourceFileInformationParser.parse(httpFetcher.fetchContent(urlBuilder.getSourceFileInformationUrl()));
+		return sourceFileInformationParser.parse(httpFetcher.get(urlBuilder.getSourceFileInformationUrl()));
 	}
 	
 }

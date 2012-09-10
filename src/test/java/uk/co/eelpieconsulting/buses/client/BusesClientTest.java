@@ -56,7 +56,7 @@ public class BusesClientTest {
 	@Test
 	public void canFetchStopboardFromLiveApiEndpoints() throws Exception {		
 		when(countdownApiUrlBuilder.getStopBoardUrl(STOPBOARD_ID)).thenReturn(STOPBOARD_URL);
-		when(httpFetcher.fetchContent(STOPBOARD_URL)).thenReturn(STOPBOARD_JSON);
+		when(httpFetcher.get(STOPBOARD_URL)).thenReturn(STOPBOARD_JSON);
 		when(stopBoardParser.parse(STOPBOARD_JSON)).thenReturn(stopBoard);
 		
 		StopBoard returnedStopBoard = api.getStopBoard(STOPBOARD_ID);
@@ -67,7 +67,7 @@ public class BusesClientTest {
 	@Test(expected = HttpFetchException.class)
 	public void shouldThrowInformativeExceptionIfHttpFetchFails() throws Exception {
 		when(countdownApiUrlBuilder.getStopBoardUrl(STOPBOARD_ID)).thenReturn(STOPBOARD_URL);
-		when(httpFetcher.fetchContent(STOPBOARD_URL)).thenThrow(new HttpFetchException());
+		when(httpFetcher.get(STOPBOARD_URL)).thenThrow(new HttpFetchException(new RuntimeException()));
 		
 		api.getStopBoard(STOPBOARD_ID);
 	}
@@ -75,7 +75,7 @@ public class BusesClientTest {
 	@Test(expected = ParsingException.class)
 	public void shouldThrowInformativeExceptionIfParsingFails() throws Exception {
 		when(countdownApiUrlBuilder.getStopBoardUrl(STOPBOARD_ID)).thenReturn(STOPBOARD_URL);
-		when(httpFetcher.fetchContent(STOPBOARD_URL)).thenReturn(STOPBOARD_JSON);
+		when(httpFetcher.get(STOPBOARD_URL)).thenReturn(STOPBOARD_JSON);
 		when(stopBoardParser.parse(STOPBOARD_JSON)).thenThrow(new ParsingException());
 		
 		api.getStopBoard(STOPBOARD_ID);
@@ -84,7 +84,7 @@ public class BusesClientTest {
 	@Test
 	public void canSearchForStopsWithinBoundingBox() throws Exception {
 		when(countdownApiUrlBuilder.getMarkerSearchUrl(LAT, LNG, RADIUS)).thenReturn(STOP_SEARCH_URL);
-		when(httpFetcher.fetchContent(STOP_SEARCH_URL)).thenReturn(STOP_SEARCH_JSON);
+		when(httpFetcher.get(STOP_SEARCH_URL)).thenReturn(STOP_SEARCH_JSON);
 		when(stopSearchParser.parse(STOP_SEARCH_JSON)).thenReturn(stops);
 		
 		List<Stop> returnedStops = api.findStopsWithin(LAT, LNG, RADIUS);
