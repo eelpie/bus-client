@@ -97,6 +97,11 @@ public class BusesClientFunctionalTest {
 		assertEquals("York Street / Twickenham", stop.getName());
 	}
 	
+	@Test
+	public void canLoadSourceFileInformation() throws Exception {
+		assertEquals(1, api.getSourceFileInformation().size());
+	}
+	
 	// Example usage for README file
 	@Test
 	public void exampleUsage() throws Exception {
@@ -117,5 +122,5 @@ public class BusesClientFunctionalTest {
 		System.out.println("Next arrival is " + firstArrival.getRoute().getRoute() + " to " + firstArrival.getRoute().getTowards() + ": " + firstArrival.getEstimatedWait());
 		System.out.println("Last updated: " + stopBoard.getLastUpdated());
 	}
-	
+		
 }
