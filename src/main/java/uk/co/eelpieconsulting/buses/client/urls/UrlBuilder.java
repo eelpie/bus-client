@@ -51,6 +51,10 @@ public class UrlBuilder {
 		return apiUrl + "/sources";
 	}
 	
+	public String getResolveLocationsUrl(double latitude, double longitude) {
+		return apiUrl + "/resolve?latitude=" + latitude + "&longitude=" + longitude;
+	}
+	
 	private String urlEncode(String q) {
 		try {
 			return URLEncoder.encode(q, "UTF-8");

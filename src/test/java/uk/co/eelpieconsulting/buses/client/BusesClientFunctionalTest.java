@@ -102,6 +102,11 @@ public class BusesClientFunctionalTest {
 		assertEquals(1, api.getSourceFileInformation().size());
 	}
 	
+	@Test
+	public void canResolveLocation() throws Exception {
+		assertEquals("York Street, Ham, London Borough of Richmond upon Thames", api.resolveLocation(51.4475, -0.327160));
+	}
+	
 	// Example usage for README file
 	@Test
 	public void exampleUsage() throws Exception {

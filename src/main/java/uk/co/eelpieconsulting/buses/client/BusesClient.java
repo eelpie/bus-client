@@ -2,6 +2,8 @@ package uk.co.eelpieconsulting.buses.client;
 
 import java.util.List;
 
+import org.json.JSONException;
+
 import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.buses.client.model.FileInformation;
 import uk.co.eelpieconsulting.buses.client.model.StopBoard;
@@ -81,6 +83,14 @@ public class BusesClient {
 	
 	public List<FileInformation> getSourceFileInformation() throws HttpFetchException, ParsingException {
 		return sourceFileInformationParser.parse(httpFetcher.get(urlBuilder.getSourceFileInformationUrl()));
+	}
+
+	public String resolveLocation(double latitude, double longitude) throws JSONException, HttpFetchException {
+		return parseLocation(httpFetcher.get(urlBuilder.getResolveLocationsUrl(latitude, longitude)));		
+	}
+	
+	public String parseLocation(String json) throws JSONException {
+		return json.replaceAll("\\\"", "");
 	}
 	
 }
