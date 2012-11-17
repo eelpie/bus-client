@@ -4,6 +4,7 @@ import java.util.List;
 
 import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.buses.client.model.FileInformation;
+import uk.co.eelpieconsulting.buses.client.model.RoutesNear;
 import uk.co.eelpieconsulting.buses.client.model.StopBoard;
 import uk.co.eelpieconsulting.buses.client.model.StopsNear;
 import uk.co.eelpieconsulting.buses.client.parsers.RouteParser;
@@ -58,6 +59,10 @@ public class BusesClient {
 	
 	public StopsNear findStopsNearLocation(double latitude, double longitude, int radius) throws HttpFetchException, ParsingException {
 		return stopSearchParser.parseStopsNear(httpFetcher.get(urlBuilder.getStopsNearLocationUrl(latitude, longitude, radius)));
+	}
+	
+	public RoutesNear findRoutesNearLocation(double latitude, double longitude, int radius) throws HttpFetchException, ParsingException {
+		return routeParser.parseRoutesNear(httpFetcher.get(urlBuilder.getRoutesNearLocationUrl(latitude, longitude, radius)));
 	}
 	
 	public List<Route> findRoutesWithin(double latitude, double longitude, int radius) throws HttpFetchException, ParsingException {

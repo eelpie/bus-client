@@ -31,6 +31,10 @@ public class UrlBuilder {
 		return apiUrl + "/routes/near?latitude=" + latitude + "&longitude=" + longitude;
 	}
 	
+	public String getRoutesNearLocationUrl(double latitude, double longitude, int radius) {
+		return getNearbyRoutesUrl(latitude, longitude, radius) + "&resolve=true";
+	}
+	
 	public String getStopIdSearchUrl(int id) {
 		return apiUrl + "/stop/" + id;				
 	}

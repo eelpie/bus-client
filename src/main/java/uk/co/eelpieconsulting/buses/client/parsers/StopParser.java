@@ -37,7 +37,6 @@ public class StopParser {
 	}
 	
 	public StopsNear parseStopsNear(String json) throws ParsingException {
-		System.out.println(json);
 		try {
 			JSONObject stopsNearJson = new JSONObject(json);
 			final JSONArray stopsJson = stopsNearJson.getJSONArray("stops");			
@@ -48,7 +47,6 @@ public class StopParser {
 			throw new ParsingException();
 		}
 	}
-
 	
 	public Stop parseStop(String json) throws ParsingException {
 		try {

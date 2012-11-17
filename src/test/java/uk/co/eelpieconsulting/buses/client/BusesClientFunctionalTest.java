@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import uk.co.eelpieconsulting.buses.client.model.Arrival;
+import uk.co.eelpieconsulting.buses.client.model.RoutesNear;
 import uk.co.eelpieconsulting.buses.client.model.StopBoard;
 import uk.co.eelpieconsulting.buses.client.model.StopsNear;
 import uk.co.eelpieconsulting.busroutes.model.Route;
@@ -54,6 +55,18 @@ public class BusesClientFunctionalTest {
 		assertFalse(results.getStops().isEmpty());
 		for (Stop stop : results.getStops()) {
 			System.out.println(stop);
+		}
+	}
+	
+	@Test
+	public void canResolveLocationWhenSearchingForNearbyRoutes() throws Exception {
+		final RoutesNear results =  api.findRoutesNearLocation(51.4475, -0.327160, 100);
+
+		System.out.println(results.getLocation());
+		assertEquals("York Street, Ham, London Borough of Richmond upon Thames", results.getLocation());
+		assertFalse(results.getRoutes().isEmpty());
+		for (Route route : results.getRoutes()) {
+			System.out.println(route);
 		}
 	}
 	
