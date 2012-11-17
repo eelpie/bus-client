@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.co.eelpieconsulting.buses.client.model.StopsNear;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
 
 public class StopParserTest {
@@ -31,6 +32,14 @@ public class StopParserTest {
 			}
 		}
 		fail();
+	}
+	
+	@Test
+	public void canParseNearbyStops() throws Exception {
+		StopsNear result = stopParser.parseStopsNear(ContentLoader.loadContent("stops_nearby.json"));
+		
+		assertEquals("York Street, Ham, London Borough of Richmond upon Thames", result.getLocation());
+		assertEquals("York Street / Twickenham", result.getStops().get(0).getName());
 	}
 	
 }

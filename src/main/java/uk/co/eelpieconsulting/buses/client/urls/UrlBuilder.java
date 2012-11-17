@@ -23,6 +23,10 @@ public class UrlBuilder {
 		return apiUrl + "/stops/near?latitude=" + latitude + "&longitude=" + longitude;
 	}
 	
+	public String getStopsNearLocationUrl(double latitude, double longitude, int radius) {
+		return getMarkerSearchUrl(latitude, longitude, radius) + "&resolve=true";
+	}
+	
 	public String getNearbyRoutesUrl(double latitude, double longitude, int radius) {
 		return apiUrl + "/routes/near?latitude=" + latitude + "&longitude=" + longitude;
 	}
@@ -49,10 +53,6 @@ public class UrlBuilder {
 	
 	public String getSourceFileInformationUrl() {
 		return apiUrl + "/sources";
-	}
-	
-	public String getResolveLocationsUrl(double latitude, double longitude) {
-		return apiUrl + "/resolve?latitude=" + latitude + "&longitude=" + longitude;
 	}
 	
 	private String urlEncode(String q) {

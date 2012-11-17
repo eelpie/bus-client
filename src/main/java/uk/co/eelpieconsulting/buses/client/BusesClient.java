@@ -2,11 +2,10 @@ package uk.co.eelpieconsulting.buses.client;
 
 import java.util.List;
 
-import org.json.JSONException;
-
 import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
 import uk.co.eelpieconsulting.buses.client.model.FileInformation;
 import uk.co.eelpieconsulting.buses.client.model.StopBoard;
+import uk.co.eelpieconsulting.buses.client.model.StopsNear;
 import uk.co.eelpieconsulting.buses.client.parsers.RouteParser;
 import uk.co.eelpieconsulting.buses.client.parsers.SourceFileInformationParser;
 import uk.co.eelpieconsulting.buses.client.parsers.StopBoardParser;
@@ -57,6 +56,10 @@ public class BusesClient {
 		return stopSearchParser.parse(httpFetcher.get(urlBuilder.getMarkerSearchUrl(latitude, longitude, radius)));
 	}
 	
+	public StopsNear findStopsNearLocation(double latitude, double longitude, int radius) throws HttpFetchException, ParsingException {
+		return stopSearchParser.parseStopsNear(httpFetcher.get(urlBuilder.getStopsNearLocationUrl(latitude, longitude, radius)));
+	}
+	
 	public List<Route> findRoutesWithin(double latitude, double longitude, int radius) throws HttpFetchException, ParsingException {
 		return routeParser.parse(httpFetcher.get(urlBuilder.getNearbyRoutesUrl(latitude, longitude, radius)));
 	}
@@ -83,14 +86,6 @@ public class BusesClient {
 	
 	public List<FileInformation> getSourceFileInformation() throws HttpFetchException, ParsingException {
 		return sourceFileInformationParser.parse(httpFetcher.get(urlBuilder.getSourceFileInformationUrl()));
-	}
-
-	public String resolveLocation(double latitude, double longitude) throws JSONException, HttpFetchException {
-		return parseLocation(httpFetcher.get(urlBuilder.getResolveLocationsUrl(latitude, longitude)));		
-	}
-	
-	public String parseLocation(String json) throws JSONException {
-		return json.replaceAll("\\\"", "");
 	}
 	
 }

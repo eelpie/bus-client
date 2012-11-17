@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import uk.co.eelpieconsulting.buses.client.model.Arrival;
 import uk.co.eelpieconsulting.buses.client.model.StopBoard;
+import uk.co.eelpieconsulting.buses.client.model.StopsNear;
 import uk.co.eelpieconsulting.busroutes.model.Route;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
 
@@ -41,8 +42,17 @@ public class BusesClientFunctionalTest {
 		List<Stop> stops = api.findStopsWithin(51.454, -0.351, 1000);
 		
 		assertNotNull(stops);
-		assertFalse(stops.isEmpty());
-		for (Stop stop : stops) {
+		assertFalse(stops.isEmpty());		
+	}
+	
+	@Test
+	public void canResolveLocationWhenSearchingForNearbyStops() throws Exception {
+		final StopsNear results =  api.findStopsNearLocation(51.4475, -0.327160, 100);
+
+		System.out.println(results.getLocation());
+		assertEquals("York Street, Ham, London Borough of Richmond upon Thames", results.getLocation());
+		assertFalse(results.getStops().isEmpty());
+		for (Stop stop : results.getStops()) {
 			System.out.println(stop);
 		}
 	}
@@ -100,11 +110,6 @@ public class BusesClientFunctionalTest {
 	@Test
 	public void canLoadSourceFileInformation() throws Exception {
 		assertEquals(1, api.getSourceFileInformation().size());
-	}
-	
-	@Test
-	public void canResolveLocation() throws Exception {
-		assertEquals("York Street, Ham, London Borough of Richmond upon Thames", api.resolveLocation(51.4475, -0.327160));
 	}
 	
 	// Example usage for README file

@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import uk.co.eelpieconsulting.buses.client.exceptions.ParsingException;
+import uk.co.eelpieconsulting.buses.client.model.StopsNear;
 import uk.co.eelpieconsulting.busroutes.model.Stop;
 
 public class StopParser {
@@ -34,6 +35,20 @@ public class StopParser {
 			throw new ParsingException();
 		}
 	}
+	
+	public StopsNear parseStopsNear(String json) throws ParsingException {
+		System.out.println(json);
+		try {
+			JSONObject stopsNearJson = new JSONObject(json);
+			final JSONArray stopsJson = stopsNearJson.getJSONArray("stops");			
+			return new StopsNear(parseStopList(stopsJson), stopsNearJson.getString("location"));
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+			throw new ParsingException();
+		}
+	}
+
 	
 	public Stop parseStop(String json) throws ParsingException {
 		try {
@@ -69,5 +84,5 @@ public class StopParser {
 		
 		return stop;
 	}
-
+	
 }
