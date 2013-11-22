@@ -51,7 +51,7 @@ public class BusesClientFunctionalTest {
 		final StopsNear results =  api.findStopsNearLocation(51.4475, -0.327160, 100);
 
 		System.out.println(results.getLocation());
-		assertEquals("York Street, Ham, London Borough of Richmond upon Thames", results.getLocation());
+		assertEquals("York Street, St Margarets, London Borough of Richmond upon Thames", results.getLocation());
 		assertFalse(results.getStops().isEmpty());
 		for (Stop stop : results.getStops()) {
 			System.out.println(stop);
@@ -63,7 +63,7 @@ public class BusesClientFunctionalTest {
 		final RoutesNear results =  api.findRoutesNearLocation(51.4475, -0.327160, 100);
 
 		System.out.println(results.getLocation());
-		assertEquals("York Street, Ham, London Borough of Richmond upon Thames", results.getLocation());
+		assertEquals("York Street, St Margarets, London Borough of Richmond upon Thames", results.getLocation());
 		assertFalse(results.getRoutes().isEmpty());
 		for (Route route : results.getRoutes()) {
 			System.out.println(route);
@@ -87,7 +87,7 @@ public class BusesClientFunctionalTest {
 		for (Stop stop : routeStops) {
 			System.out.println(stop.getName());
 		}
-		assertEquals(47, routeStops.size());
+		assertEquals(46, routeStops.size());
 	}
 		
 	@Test
